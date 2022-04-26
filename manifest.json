@@ -1,0 +1,10 @@
+{
+  "id": "prettier-format",
+  "name": "Prettier Format",
+  "version": "1.0.0",
+  "minAppVersion": "0.12.0",
+  "description": "run Prettier from the system command line",
+  "author": "jie",
+  "authorUrl": "https://obsidian.md",
+  "isDesktopOnly": true
+}

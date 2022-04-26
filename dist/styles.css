@@ -1,0 +1,7 @@
+/* src/styles.less */
+.prettier-format .setting-error .setting-item-description {
+  color: red;
+}
+.prettier-format .setting-error .setting-item-control input {
+  color: red;
+}

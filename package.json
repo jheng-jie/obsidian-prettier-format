@@ -1,0 +1,32 @@
+{
+  "name": "prettier-format",
+  "version": "1.0.0",
+  "description": "Use system node prettier",
+  "main": "src/main.js",
+  "scripts": {
+    "publish": "cp -r dist/ ~/Documents/github/note/.obsidian/plugins/prettierrc/",
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/lodash": "^4.14.182",
+    "@types/node": "^16.11.6",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "@typescript-eslint/parser": "^5.2.0",
+    "builtin-modules": "^3.2.0",
+    "esbuild": "0.13.12",
+    "esbuild-plugin-less": "^1.1.6",
+    "lodash": "^4.17.21",
+    "obsidian": "^0.13.26",
+    "prettier": "^2.6.2",
+    "tslib": "2.3.1",
+    "typescript": "4.4.4"
+  },
+  "dependencies": {
+    "babylon": "^6.18.0"
+  }
+}
