@@ -1,5 +1,5 @@
 import type { PluginSettings, OnSaveCache } from "./@types"
-import type { View, DataAdapter, TAbstractFile, FileStats } from "obsidian"
+import type { View, DataAdapter, TAbstractFile } from "obsidian"
 
 import { Notice, Plugin } from "obsidian"
 const fs = require("fs")
@@ -40,8 +40,12 @@ export default class extends Plugin {
     // This creates an icon in the left ribbon.
     this.addRibbonIcon("dice", "Prettier Format", this.onRibbonClick.bind(this))
 
-    // register on save event
-    this.registerEvent(this.app.vault.on("modify", this.onFileSave.bind(this)))
+    // cmd
+    this.addCommand({
+      id: "prettier-cli",
+      name: "Prettier Format",
+      callback: this.onRibbonClick.bind(this),
+    })
 
     // setting tab
     this.addSettingTab(new SettingTab(this.app, this))
@@ -90,27 +94,6 @@ export default class extends Plugin {
   }
 
   /**
-   * @desc on file change
-   */
-  async onFileSave(file: TAbstractFile & { stat: FileStats }) {
-    if (!this.setting.formatOnSave) return
-
-    // clear timeout
-    if (this.saveCache?.[file.path]) {
-      const { size } = this.saveCache[file.path]
-      // not change
-      if (size === file.stat.size) return
-      this.saveCache[file.path]?.timout && clearTimeout(this.saveCache[file.path].timout)
-    }
-
-    // cache
-    this.saveCache[file.path] = {
-      size: file.stat.size,
-      timout: setTimeout(() => this.onPrettier(file), 333),
-    }
-  }
-
-  /**
    * @desc load setting
    */
   async loadSettings() {
@@ -125,7 +108,7 @@ export default class extends Plugin {
   /**
    * @desc save setting
    */
-  async saveSettings(key: keyof PluginSettings, value: string | boolean) {
+  async saveSettings(key: keyof PluginSettings, value: string | boolean | number) {
     try {
       this.setting[key] = value as never
       await this.saveData(this.setting)

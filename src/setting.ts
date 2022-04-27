@@ -15,7 +15,6 @@ export const DEFAULT_SETTINGS: PluginSettings = {
   node: "/usr/local/bin",
   prettier: "/usr/local/bin",
   config: "./.prettierrc",
-  formatOnSave: false,
   notice: false,
 }
 
@@ -48,9 +47,6 @@ export default class extends PluginSettingTab {
     // prettier config path
     this.createPrettierConfigSetting()
 
-    // on save
-    this.createOnSave()
-
     // show notice
     this.createShowNotice()
   }
@@ -66,19 +62,6 @@ export default class extends PluginSettingTab {
 
     // toggle button
     setting.addToggle(btn => btn.setValue(this.plugin.setting.notice).onChange((value: boolean) => this.plugin.saveSettings("notice", value)))
-  }
-
-  /**
-   * @desc create on save
-   */
-  createOnSave() {
-    const setting = new Setting(this.containerEl)
-
-    // set label
-    setting.setName("Format On Save").setDesc("format a file on save")
-
-    // toggle button
-    setting.addToggle(btn => btn.setValue(this.plugin.setting.formatOnSave).onChange((value: boolean) => this.plugin.saveSettings("formatOnSave", value)))
   }
 
   /**

@@ -5,8 +5,6 @@ export type PluginSettings = {
   prettier: string
   // prettier rc options path
   config: string
-  // format on save
-  formatOnSave: boolean
   // show notice
   notice: boolean
 }
@@ -17,7 +15,7 @@ export type CustomPlugin = import("obsidian").Plugin & {
   // setting attribute
   setting: PluginSettings
   // save setting
-  saveSettings: (key: keyof PluginSettings, value: string | boolean) => void
+  saveSettings: (key: keyof PluginSettings, value: string | boolean | number) => void
 }
 
 export type OnSaveCache = {
