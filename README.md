@@ -70,11 +70,9 @@ yarn run build
     endOfLine: "auto",
   }
   ```
-  
-- `Format On Save` 存檔時自動執行
 
 #### 使用方式
 
 1. 點擊 Ribbon 功能列 Prettier Format 按扭
 
-2. 勾選 Format On Save，存檔時自動執行
+2. cmd + p 選擇 Prettier Format
