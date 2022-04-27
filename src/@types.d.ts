@@ -7,6 +7,8 @@ export type PluginSettings = {
   config: string
   // format on save
   formatOnSave: boolean
+  // show notice
+  notice: boolean
 }
 
 export type CustomPlugin = import("obsidian").Plugin & {

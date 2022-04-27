@@ -16,6 +16,7 @@ export const DEFAULT_SETTINGS: PluginSettings = {
   prettier: "/usr/local/bin",
   config: "./.prettierrc",
   formatOnSave: false,
+  notice: false,
 }
 
 /**
@@ -49,6 +50,22 @@ export default class extends PluginSettingTab {
 
     // on save
     this.createOnSave()
+
+    // show notice
+    this.createShowNotice()
+  }
+
+  /**
+   * @desc create show notice
+   */
+  createShowNotice() {
+    const setting = new Setting(this.containerEl)
+
+    // set label
+    setting.setName("Prettier Notice").setDesc("notice on prettier run finish")
+
+    // toggle button
+    setting.addToggle(btn => btn.setValue(this.plugin.setting.notice).onChange((value: boolean) => this.plugin.saveSettings("notice", value)))
   }
 
   /**

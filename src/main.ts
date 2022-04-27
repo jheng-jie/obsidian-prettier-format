@@ -73,7 +73,8 @@ export default class extends Plugin {
   async onPrettier(file: TAbstractFile) {
     try {
       // cmd
-      new Notice(await PrettierCommandLine.call(this.setting, this.projectPath, file.path))
+      const msg = await PrettierCommandLine.call(this.setting, this.projectPath, file.path)
+      if (this.setting.notice) new Notice(msg)
     } catch (e) {
       console.info("prettier-format.cmd", "fail", e)
       new Notice(String(e))
